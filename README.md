@@ -19,3 +19,5 @@ and a PostgreSQL database running in Docker containers.
 - Feature branches are created from `develop`
 - Pull requests are reviewed before merging
 - Direct commits to `main` and `develop` are restricted
+
+This project follows a weekly milestone-based development plan.
