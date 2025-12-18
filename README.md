@@ -1,8 +1,11 @@
 # System Programming Project
 
 This project is developed as part of the System Programming course.
-The goal of the project is to design and implement a distributed system
-using Ubuntu, Git, GitHub, Docker, and C++ technologies.
+
+## Project Objective
+
+The objective of this project is to gain hands-on experience in system programming concepts,
+collaborative software development, containerization, and CI/CD practices using modern tools.
 
 ## Technologies
 - Ubuntu
