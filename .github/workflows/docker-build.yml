@@ -31,8 +31,8 @@ jobs:
           file: Dockerfile.db
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/system-programming-project-postgres:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/system-programming-project-postgres:v0.1.0
+            ${{ secrets.DOCKERHUB_USERNAME }}/fbu-220304031-system-programming-project-postgres:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/fbu-220304031-system-programming-project-postgres:v0.1.0
 
       - name: Build & push app image
         uses: docker/build-push-action@v6
@@ -41,5 +41,5 @@ jobs:
           file: Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/system-programming-project-app:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/system-programming-project-app:v0.1.0
+            ${{ secrets.DOCKERHUB_USERNAME }}/fbu-220304031-system-programming-project-app:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/fbu-220304031-system-programming-project-app:v0.1.0
