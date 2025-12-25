@@ -2,8 +2,9 @@ version: "3.9"
 
 services:
   db:
-    image: DOCKERHUB_USERNAME/system-programming-project-postgres:latest
+    image: DOCKERHUB_USERNAME/fbu-220304031-system-programming-project-postgres:latest
     container_name: sis_db
+    restart: unless-stopped
     environment:
       POSTGRES_DB: sis
       POSTGRES_USER: sis_user
@@ -19,8 +20,9 @@ services:
       retries: 5
 
   app:
-    image: DOCKERHUB_USERNAME/system-programming-project-app:latest
+    image: DOCKERHUB_USERNAME/fbu-220304031-system-programming-project-app:latest
     container_name: sis_app
+    restart: unless-stopped
     environment:
       DB_HOST: db
       DB_PORT: "5432"
@@ -32,7 +34,7 @@ services:
         condition: service_healthy
     networks:
       - sis_net
-    # Week2'de app daha CLI olacağı için container'ın kapanmaması adına:
+   
     command: ["sleep", "infinity"]
 
 networks:
