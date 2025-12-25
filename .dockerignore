@@ -1,0 +1,13 @@
+.git
+.github
+.vscode
+build
+cmake-build-*
+*.o
+*.a
+*.so
+*.out
+*.exe
+*.log
+*.tmp
+.DS_Store
