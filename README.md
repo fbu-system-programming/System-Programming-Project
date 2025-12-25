@@ -29,5 +29,9 @@ This project follows a weekly milestone-based development plan.
 
 - **PostgreSQL Image**: https://hub.docker.com/r/mertalimirzanli/fbu-220304031-system-programming-project-postgres
 - **Application Image**: https://hub.docker.com/r/mertalimirzanli/fbu-220304031-system-programming-project-app
+### Image Tags
+
+- `latest`: Latest stable image built via GitHub Actions (Week 2).
+- `v0.1.0`: Initial Docker image version prepared for Week 2.
 
 
