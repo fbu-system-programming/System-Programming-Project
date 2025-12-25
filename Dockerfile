@@ -1,10 +1,17 @@
 FROM ubuntu:22.04
+
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y ca-certificates \
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    build-essential \
+    cmake \
  && rm -rf /var/lib/apt/lists/*
 
 COPY . .
 
-# Week 2: app henüz tam derlenmeyebilir; container ayakta kalsın
-CMD ["bash", "-lc", "echo 'App image (Week2) ready. Build/run app in Week3.' && sleep infinity"]
+# Build the minimal C++ app (Week 2)
+RUN cmake -S . -B build && cmake --build build
+
+# Run once (prints message), then keep container alive for Week 2 compose demo
+CMD ["bash", "-lc", "./build/main && sleep infinity"]
