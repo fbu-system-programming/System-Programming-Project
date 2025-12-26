@@ -1,4 +1,4 @@
-# CI Pipeline Research (Week 1)
+# CI Pipeline Research 
 
 ## Candidate Tools
 - GitHub Actions
@@ -16,3 +16,4 @@ GitHub Actions is preferred because it is integrated with GitHub and easy to mai
 
 ## Notes
 The initial CI workflow file will be added in later phases when the build skeleton is ready.
+Implemented in Week 2: .github/workflows/docker-build.yml builds and pushes images.

@@ -1,9 +1,20 @@
-# Docker Hub Account
+# Docker Hub Account 
 
- Docker Hub account has been created for publishing images in later phases.
+- Docker Hub username: mertalimirzanli
 
-- Docker Hub username: <mertalimirzanli>
+## Repositories
+- fbu-220304031-system-programming-project-postgres
+- fbu-220304031-system-programming-project-app
 
-Notes:
+## Image Tags
+- `latest`: Built & pushed by GitHub Actions (Week 2)
+- `v0.1.0`: Initial Week 2 image tag
+
+## Notes
+- Credentials are stored in GitHub Secrets:
+  - `DOCKERHUB_USERNAME`
+  - `DOCKERHUB_TOKEN`
 - No credentials are stored in this repository.
-- Images will be published after Dockerfiles are finalized.
+
+- **PostgreSQL Image**: https://hub.docker.com/r/mertalimirzanli/fbu-220304031-system-programming-project-postgres
+- **Application Image**: https://hub.docker.com/r/mertalimirzanli/fbu-220304031-system-programming-project-app

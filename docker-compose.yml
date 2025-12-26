@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   db:
-    image: DOCKERHUB_USERNAME/fbu-220304031-system-programming-project-postgres:latest
+    image: mertalimirzanli/fbu-220304031-system-programming-project-postgres:latest
     container_name: sis_db
     restart: unless-stopped
     environment:
@@ -20,7 +20,7 @@ services:
       retries: 5
 
   app:
-    image: DOCKERHUB_USERNAME/fbu-220304031-system-programming-project-app:latest
+    image: mertalimirzanli/fbu-220304031-system-programming-project-app:latest
     container_name: sis_app
     restart: unless-stopped
     environment:
