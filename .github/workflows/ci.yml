@@ -30,7 +30,5 @@ jobs:
       - name: Test (ctest)
         run: ctest --test-dir build --output-on-failure
 
-      - name: Run (smoke)
-        run: |
-          set -euo pipefail
-          ./build/sis_app
+      - name: Smoke (run unit_validation)
+        run: ./build/unit_validation
