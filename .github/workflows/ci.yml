@@ -33,28 +33,4 @@ jobs:
       - name: Run (smoke)
         run: |
           set -euo pipefail
-
-          echo "Searching for built executable..."
-          if [ -f build/main ]; then
-            exe="./build/main"
-          elif [ -f build/src/main ]; then
-            exe="./build/src/main"
-          else
-            exe="$(find build -maxdepth 3 -type f -executable \
-              ! -path "*/CMakeFiles/*" \
-              ! -name "cmake_install.cmake" \
-              ! -name "Makefile" \
-              | grep -E '(/|^)main$' | head -n 1 || true)"
-          fi
-
-          if [ -z "${exe}" ]; then
-            echo "ERROR: main executable not found."
-            echo "Top of build/:"
-            ls -lah build || true
-            echo "Executable candidates under build/:"
-            find build -maxdepth 3 -type f -executable ! -path "*/CMakeFiles/*" -print || true
-            exit 1
-          fi
-
-          echo "Running: ${exe}"
-          "${exe}"
+          ./build/sis_app
