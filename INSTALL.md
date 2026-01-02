@@ -24,3 +24,14 @@ The build is compatible with Docker-based workflows used in Week 2.
 
 
 > Note: This guide will be expanded in later project phases.
+## Week 3 – Run with Docker Compose
+
+1) Create a local `.env` file based on the template:
+
+- Copy `.env.example` to `.env`
+- Set `DOCKERHUB_USERNAME` to your Docker Hub username
+
+2) Build and start services:
+
+```bash
+docker compose up -d --build
