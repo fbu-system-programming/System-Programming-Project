@@ -1,0 +1,45 @@
+version: "3.9"
+
+services:
+  db:
+    image: mertalimirzanli/fbu-220304031-system-programming-project-postgres:latest
+    container_name: sis_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: sis
+      POSTGRES_USER: sis_user
+      POSTGRES_PASSWORD: sis_pass
+    volumes:
+      - sis_db_data:/var/lib/postgresql/data
+    networks:
+      - sis_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sis_user -d sis"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    image: mertalimirzanli/fbu-220304031-system-programming-project-app:latest
+    container_name: sis_app
+    restart: unless-stopped
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: sis
+      DB_USER: sis_user
+      DB_PASS: sis_pass
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - sis_net
+   
+    command: ["sleep", "infinity"]
+
+networks:
+  sis_net:
+    driver: bridge
+
+volumes:
+  sis_db_data:
