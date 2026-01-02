@@ -54,6 +54,13 @@ High-level workflow:
 2. PostgreSQL container is started and initialized using scripts under `db/init/`.
 3. The C++ application container is built and executed.
 
+## Week 3 — Run with Docker Compose
+
+### Option A (Minimal terminal)
+```bash
+docker compose up -d --build
+docker compose exec app /app/sis_app
+
 ### Notes
 - The application uses environment variables for database configuration.
 - Unit tests are executed during the build process when applicable.
