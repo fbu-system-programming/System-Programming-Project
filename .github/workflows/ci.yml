@@ -9,20 +9,52 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install build tools
+      - name: Install build dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y cmake g++ make libpqxx-dev
+          sudo apt-get install -y --no-install-recommends \
+            cmake g++ make pkg-config \
+            libpq-dev libpqxx-dev
 
       - name: Configure
-        run: cmake -S . -B build
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
 
       - name: Build
-        run: cmake --build build
+        run: cmake --build build --config Release
+
+      - name: Test (ctest)
+        run: ctest --test-dir build --output-on-failure
 
       - name: Run (smoke)
-        run: ./build/main
+        run: |
+          set -euo pipefail
+
+          echo "Searching for built executable..."
+          if [ -f build/main ]; then
+            exe="./build/main"
+          elif [ -f build/src/main ]; then
+            exe="./build/src/main"
+          else
+            exe="$(find build -maxdepth 3 -type f -executable \
+              ! -path "*/CMakeFiles/*" \
+              ! -name "cmake_install.cmake" \
+              ! -name "Makefile" \
+              | grep -E '(/|^)main$' | head -n 1 || true)"
+          fi
+
+          if [ -z "${exe}" ]; then
+            echo "ERROR: main executable not found."
+            echo "Top of build/:"
+            ls -lah build || true
+            echo "Executable candidates under build/:"
+            find build -maxdepth 3 -type f -executable ! -path "*/CMakeFiles/*" -print || true
+            exit 1
+          fi
+
+          echo "Running: ${exe}"
+          "${exe}"
