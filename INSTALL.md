@@ -1,63 +1,151 @@
-# Installation Guide
+# Installation Guide (INSTALL.md)
 
-This document describes how to set up the project environment.
+This document explains how to set up and run the **Student Information System (SIS)** project.
 
-## Prerequisites
-- Ubuntu Linux
-- Docker
-- Docker Compose
-- Git
+The system runs as **two Docker containers**:
 
-## Setup
-1. Clone the repository.
-2. Build and start the services using Docker Compose.
-3. Run the application inside the container (to be implemented).
+* **PostgreSQL database** container (`sis_db`)
+* **C++ SIS application** container (`sis_app`)
+  (built with **CMake**, connects to PostgreSQL via **libpqxx**)
 
-## CMake Build Verification (Week 2)
+> Requirement: `docker compose` must be able to start both containers successfully.
 
-The project is configured to build using CMake with the following structure:
-- src/
-- include/
-- tests/
+---
 
-The build is compatible with Docker-based workflows used in Week 2.
+## 1) Prerequisites
 
+Install the following on your machine:
 
-> Note: This guide will be expanded in later project phases.
+* **Git**
+* **Docker**
+* **Docker Compose** (Docker Desktop includes Docker + Compose)
 
-## Week 3 – Run with Docker Compose
+Optional (only if you want to build locally outside Docker):
 
-1) Create a local `.env` file based on the template:
+* **CMake** + a C++ compiler (e.g., g++)
 
-- Copy `.env.example` to `.env`
-- Set `DOCKERHUB_USERNAME` to your Docker Hub username
+---
 
-2) Build and start services:
+## 2) Clone the repository
 
-```bash
+Clone the repository and open the project folder.
+
+### Option A — GitHub Desktop (recommended if you avoid terminal)
+
+1. Open **GitHub Desktop**
+2. Click **File → Clone repository**
+3. Select the repository and choose a local path
+4. Click **Clone**
+5. Open the cloned folder
+
+### Option B — Terminal (optional)
+
+git clone <repo-url>
+cd System-Programming-Project
+
+---
+
+## 3) Environment variables (.env)
+
+This project uses environment variables for database configuration.
+
+### Create `.env` from `.env.example`
+
+1. In the repository root, find: `.env.example`
+2. Create a new file named: `.env`
+3. Copy the content of `.env.example` into `.env`
+4. Adjust values if needed
+
+**Important**
+
+* Do **NOT** commit `.env`
+* Commit only `.env.example`
+
+---
+
+## 4) Run with Docker Compose (recommended)
+
+From the repository root (same folder where `docker-compose.yml` exists):
+
+### Step A — Build & start containers
+
 docker compose up -d --build
 
-## Week 3 – Application Build and Execution
+### Step B — Verify containers
 
-Starting from Week 3, the project includes a buildable C++ application integrated with PostgreSQL and managed via Docker.
+docker compose ps
 
-### Build Process
-- The C++ application is built using **CMake**.
-- Source files are located under `src/` and headers under `include/`.
-- The build process is executed inside a Docker container to ensure environment consistency.
+**Expected**
 
-### Running with Docker Compose
-Docker Compose is used to orchestrate the application and database containers.
+* `sis_db` is **healthy**
+* `sis_app` is **running**
 
-High-level workflow:
-1. Docker images are built automatically (locally or via CI).
-2. PostgreSQL container is started and initialized using scripts under `db/init/`.
-3. The C++ application container is built and executed.
+If `sis_db` is not healthy, check logs:
+
+docker compose logs db
+
+---
+
+## 5) Run the application
+
+Run the SIS application inside the `app` container:
+
+docker compose exec app /app/sis_app
+
+The program provides a simple menu to:
+
+* Add student
+* List students
+* Update student
+* Delete student
 
 ### Notes
-- The application uses environment variables for database configuration.
-- Unit tests are executed during the build process when applicable.
-- CI pipelines verify successful build and execution on each pull request.
 
-This installation guide will continue to be updated as the project evolves in later weeks.
+* Student `id` must be a positive integer
+* Email must be a valid format
+* The database schema is initialized automatically via the SQL script under `db/init/`
 
+---
+
+## 6) Stop / reset
+
+### Stop containers
+
+docker compose down
+
+### Stop and remove volumes (deletes database data)
+
+docker compose down -v
+
+---
+
+## 7) Troubleshooting
+
+### “could not translate host name 'db'”
+
+* This usually happens when the app is run outside the compose network.
+* Make sure you run the app using:
+
+docker compose exec app /app/sis_app
+
+### DB not ready yet
+
+* Wait a few seconds and try again.
+* Check status:
+
+docker compose ps
+
+### Check logs (db/app)
+
+docker compose logs db
+docker compose logs app
+
+### Port conflicts
+
+* If PostgreSQL port is already used on your machine, change the port mapping in `docker-compose.yml` (if a port mapping exists).
+* If there is no port mapping, PostgreSQL is only accessible inside the Docker network, which avoids conflicts by default.
+
+### Reset everything (clean start)
+
+docker compose down -v
+docker compose up -d --build

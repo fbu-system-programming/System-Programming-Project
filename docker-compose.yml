@@ -28,7 +28,7 @@ services:
       DB_PORT: "5432"
       DB_NAME: sis
       DB_USER: sis_user
-      DB_PASS: sis_pass
+      DB_PASSWORD: sis_pass
     depends_on:
       db:
         condition: service_healthy
