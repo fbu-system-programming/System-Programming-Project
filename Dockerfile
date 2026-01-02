@@ -3,27 +3,35 @@ FROM ubuntu:22.04 AS build
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     cmake \
+    pkg-config \
+    libpq-dev \
     libpqxx-dev \
     ca-certificates \
  && rm -rf /var/lib/apt/lists/*
 
 COPY . .
 
-RUN cmake -S . -B build && cmake --build build
+RUN cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \
+ && cmake --build build --config Release
+
+# Copy app binary to a stable path for the runtime stage
+RUN mkdir -p /out && cp build/sis_app /out/sis_app
 
 # ---- runtime stage ----
 FROM ubuntu:22.04
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y \
-    libpqxx-6-4 \
+# runtime libs (safe option: install libpqxx-dev, avoids versioned package-name issues)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libpq5 \
+    libpqxx-dev \
     ca-certificates \
  && rm -rf /var/lib/apt/lists/*
 
-COPY --from=build /app/build/main /app/main
+COPY --from=build /out/sis_app /app/sis_app
 
-CMD ["/app/main"]
+CMD ["/app/sis_app"]

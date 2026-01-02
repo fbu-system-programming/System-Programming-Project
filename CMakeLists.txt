@@ -23,7 +23,18 @@ target_link_libraries(sis_core PUBLIC ${PQXX_LIBRARIES})
 add_executable(sis_app src/main.cpp)
 target_link_libraries(sis_app PRIVATE sis_core)
 
+# Put the app binary directly under build/
+set_target_properties(sis_app PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+)
+
 enable_testing()
 add_executable(unit_validation tests/test_validation.cpp)
 target_link_libraries(unit_validation PRIVATE sis_core)
+
+# Put the test binary directly under build/
+set_target_properties(unit_validation PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+)
+
 add_test(NAME unit_validation COMMAND unit_validation)
