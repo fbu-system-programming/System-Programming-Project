@@ -16,7 +16,7 @@ jobs:
       - name: Install build tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y cmake g++ make
+          sudo apt-get install -y cmake g++ make libpqxx-dev
 
       - name: Configure
         run: cmake -S . -B build
