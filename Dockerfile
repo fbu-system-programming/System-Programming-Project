@@ -14,22 +14,24 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 COPY . .
 
-RUN cmake -S . -B build -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release
+RUN cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \
+ && cmake --build build --config Release
+
+# Copy app binary to a stable path for the runtime stage
+RUN mkdir -p /out && cp build/sis_app /out/sis_app
 
 # ---- runtime stage ----
 FROM ubuntu:22.04
 
 WORKDIR /app
 
-# runtime only: shared libs for libpqxx/libpq
+# runtime libs (safe option: install libpqxx-dev, avoids versioned package-name issues)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libpq5 \
     libpqxx-dev \
     ca-certificates \
  && rm -rf /var/lib/apt/lists/*
 
-# Copy binary from build stage (handle both possible output paths)
-COPY --from=build /app/build/main /app/main
-COPY --from=build /app/build/src/main /app/main
+COPY --from=build /out/sis_app /app/sis_app
 
-CMD ["/app/main"]
+CMD ["/app/sis_app"]
