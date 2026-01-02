@@ -48,5 +48,5 @@ From **Week 3**, the project includes a C++ Student Information System (SIS) tha
 
 > Terminal:
 ```bash
-docker compose up -d --build
+docker compose up -d
 docker compose exec app /app/sis_app
