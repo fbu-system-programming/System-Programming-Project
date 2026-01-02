@@ -25,6 +25,18 @@ The build is compatible with Docker-based workflows used in Week 2.
 
 > Note: This guide will be expanded in later project phases.
 
+## Week 3 – Run with Docker Compose
+
+1) Create a local `.env` file based on the template:
+
+- Copy `.env.example` to `.env`
+- Set `DOCKERHUB_USERNAME` to your Docker Hub username
+
+2) Build and start services:
+
+```bash
+docker compose up -d --build
+
 ## Week 3 – Application Build and Execution
 
 Starting from Week 3, the project includes a buildable C++ application integrated with PostgreSQL and managed via Docker.
@@ -48,3 +60,4 @@ High-level workflow:
 - CI pipelines verify successful build and execution on each pull request.
 
 This installation guide will continue to be updated as the project evolves in later weeks.
+
