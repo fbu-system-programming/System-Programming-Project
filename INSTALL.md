@@ -27,15 +27,6 @@ The build is compatible with Docker-based workflows used in Week 2.
 
 ## Week 3 – Run with Docker Compose
 
-1) Create a local `.env` file based on the template:
-
-- Copy `.env.example` to `.env`
-- Set `DOCKERHUB_USERNAME` to your Docker Hub username
-
-2) Build and start services:
-
-```bash
-docker compose up -d --build
 
 ## Week 3 – Application Build and Execution
 
@@ -68,3 +59,12 @@ docker compose exec app /app/sis_app
 
 This installation guide will continue to be updated as the project evolves in later weeks.
 
+1) Create a local `.env` file based on the template:
+
+- Copy `.env.example` to `.env`
+- Set `DOCKERHUB_USERNAME` to your Docker Hub username
+
+2) Build and start services:
+
+```bash
+docker compose up -d --build
