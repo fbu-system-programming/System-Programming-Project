@@ -40,8 +40,10 @@ From **Week 3**, the project includes a C++ Student Information System (SIS) tha
 - Application Image: https://hub.docker.com/r/mertalimirzanli/fbu-220304031-system-programming-project-app
 
 ### Image Tags
-- `latest` : Latest stable image built via GitHub Actions
-- `v0.1.0` : Initial Docker image version prepared for Week 2
+- `latest`
+- `v0.1.0`
+Images are public and accessible on Docker Hub.
+docker compose runs successfully end-to-end with the final images.
 
 ## Running (Week 3 - Docker Compose)
 
