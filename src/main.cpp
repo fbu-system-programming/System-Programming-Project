@@ -38,8 +38,7 @@ int main() {
     DbConfig cfg = load_db_config_from_env();
     pqxx::connection conn(make_conninfo(cfg));
     StudentRepository repo(conn);
-
-    // optional safety: ensure table exists even if init script not mounted
+    
     repo.ensure_schema();
 
     while (true) {
