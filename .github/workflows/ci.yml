@@ -1,0 +1,34 @@
+name: CI (CMake Build)
+
+on:
+  pull_request:
+    branches: [ develop ]
+  push:
+    branches: [ develop, main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            cmake g++ make pkg-config \
+            libpq-dev libpqxx-dev
+
+      - name: Configure
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        run: cmake --build build --config Release
+
+      - name: Test (ctest)
+        run: ctest --test-dir build --output-on-failure
+
+      - name: Smoke (run unit_validation)
+        run: ./build/unit_validation
