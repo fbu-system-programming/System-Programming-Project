@@ -25,7 +25,7 @@ From **Week 3**, the project includes a C++ Student Information System (SIS) tha
 - `include/` : Header files
 - `tests/` : Unit tests (CTest)
 - `db/init/` : DB init SQL scripts
-- `docs/` : Documentation
+- `docs/` : Documentation and Evidances
 - `.github/workflows/` : CI workflows
 
 ## Development Workflow
@@ -45,10 +45,23 @@ docker compose runs successfully end-to-end with the final images.
 - `latest`
 - `v0.1.0`
 
-## Running (Week 3 - Docker Compose)
+## Running 
 
 
 > Terminal:
 ```bash
-docker compose up -d
+docker compose up -d --build
+docker compose ps
 docker compose exec app /app/sis_app
+```
+### Expected
+- `sis_db` should be **healthy**
+- `sis_app` should be **running**
+- The SIS application menu should appear when running   
+- Inside the application, basic CRUD operations can be verified:  
+Add student  
+List students  
+Update student  
+Delete student  
+
+
