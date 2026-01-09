@@ -34,16 +34,16 @@ From **Week 3**, the project includes a C++ Student Information System (SIS) tha
 - Direct commits to `main` and `develop` are restricted
 
 ## Docker Images (Docker Hub)
-> (Hocanın istediği iki link burada yer alır)
 
 - PostgreSQL Image: https://hub.docker.com/r/mertalimirzanli/fbu-220304031-system-programming-project-postgres
 - Application Image: https://hub.docker.com/r/mertalimirzanli/fbu-220304031-system-programming-project-app
 
+Images are public and accessible on Docker Hub.
+docker compose runs successfully end-to-end with the final images.
+
 ### Image Tags
 - `latest`
 - `v0.1.0`
-Images are public and accessible on Docker Hub.
-docker compose runs successfully end-to-end with the final images.
 
 ## Running (Week 3 - Docker Compose)
 
