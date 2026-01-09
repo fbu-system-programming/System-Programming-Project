@@ -50,5 +50,18 @@ docker compose runs successfully end-to-end with the final images.
 
 > Terminal:
 ```bash
-docker compose up -d
+docker compose up -d --build
+docker compose ps
 docker compose exec app /app/sis_app
+```
+### Expected
+- `sis_db` should be **healthy**
+- `sis_app` should be **running**
+- The SIS application menu should appear when running   
+- Inside the application, basic CRUD operations can be verified:  
+Add student  
+List students  
+Update student  
+Delete student  
+
+
