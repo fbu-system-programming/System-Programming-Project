@@ -1,4 +1,4 @@
-# Contributing Guide (CONTRIBUTING.md)
+# Contributing Guide 
 
 ## Branching Strategy
 We use a GitFlow-like workflow:
@@ -12,7 +12,7 @@ We use a GitFlow-like workflow:
 
 ---
 
-## Issue Workflow (Required)
+## Issue Workflow
 1) Create/assign an issue for the task
 2) Create a branch from `develop` (feature/* or fix/*)
 3) Commit changes (small, meaningful commits)
@@ -39,7 +39,7 @@ Use short and descriptive messages, examples:
 
 ---
 
-## Week 4 Final Merge & Release Process (Important)
+## Week 4 Final Merge & Release Process
 **We merge to `main` only at the end of Week 4.**
 
 Final steps:
@@ -57,7 +57,7 @@ Final steps:
 
 ---
 
-## Documentation Requirements (Week 4)
+## Documentation Requirements
 - `README.md` must include Docker Hub image links
 - `INSTALL.md` must explain setup and docker compose run
 - `MANUAL.md` must explain how to run and use the application
