@@ -25,7 +25,7 @@ From **Week 3**, the project includes a C++ Student Information System (SIS) tha
 - `include/` : Header files
 - `tests/` : Unit tests (CTest)
 - `db/init/` : DB init SQL scripts
-- `docs/` : Documentation
+- `docs/` : Documentation and Evidances
 - `.github/workflows/` : CI workflows
 
 ## Development Workflow
