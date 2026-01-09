@@ -45,7 +45,7 @@ docker compose runs successfully end-to-end with the final images.
 - `latest`
 - `v0.1.0`
 
-## Running (Week 3 - Docker Compose)
+## Running 
 
 
 > Terminal:
